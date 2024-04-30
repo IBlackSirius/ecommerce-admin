@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuItem
 } from "@/components/ui/dropdown-menu"
-import { SizeColumn } from "./colums"
+import { BillboardColumn } from "./colums"
 import { Button } from "@/components/ui/button"
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react"
 import toast from "react-hot-toast"
@@ -19,7 +19,7 @@ import { useState } from "react"
 import { AlertModal } from "@/components/modals/alert-moda"
 
 interface CellActionProps {
-  data: SizeColumn
+  data: BillboardColumn
 
 }
 
@@ -34,19 +34,19 @@ const CellAction: React.FC<CellActionProps> = ({
   const params = useParams()
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id)
-    toast.success('Size Id copied to the clipboard')
+    toast.success('Billboard Id copied to the clipboard')
   }
 
   const onDelete = async () => {
     try {
       setLoading(true)
-      await axios.delete(`/api/${params.storeId}/sizes/${data.id}`)
+      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`)
 
       router.refresh();
-      toast.success('Size deleted')
+      toast.success('Billboard deleted')
 
     } catch (error) {
-      toast.error("Make sure you removed all products using this size first.")
+      toast.error("Make sure you removed all categories using this billboard first.")
     }
     finally {
       setLoading(false)
@@ -78,7 +78,7 @@ const CellAction: React.FC<CellActionProps> = ({
             <Copy className="mr-2 h-4 w-4" />
             Copy Id
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/sizes/${data.id}`)}>
+          <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/billboards/${data.id}`)}>
             <Edit className="mr-2 h-4 w-4" />
             Update
           </DropdownMenuItem>
