@@ -89,6 +89,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 	})
 
 	const onSubmit = async (data: ProductFormValues) => {
+		
 		try {
 			setLoading(true)
 			if (initialData) {
@@ -165,8 +166,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 									<ImageUpload
 										value={field.value.map((image) => image.url)}
 										disabled={loading}
-										onChange={(url) => field.onChange([...field.value, { url }])}
-										onRemove={(url) => field.onChange([...field.value.filter((current) => current.url !== url)])}
+										onChange={(urls) => field.onChange([...urls])}
+										isMultiple={true}
 									/>
 								</FormControl>
 								<FormMessage />
